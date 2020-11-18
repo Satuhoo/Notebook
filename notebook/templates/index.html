@@ -1,0 +1,17 @@
+<head>
+<h1 style="color: darkslategrey;">Your notes</h1>
+</head>
+<body>
+{% if latest_notes %}
+    <ul>
+    {% for note in latest_notes %}
+        <div>
+            <h2>{{ note.note_label }}</h2> 
+            <p>{{ note.note_text }}</p>
+        </div>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No saved notes.</p>
+{% endif %}
+</body>
