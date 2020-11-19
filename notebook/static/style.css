@@ -1,0 +1,11 @@
+#h1 {
+    color: darkslategrey;
+    padding-left: 30px;
+}
+#label {
+    color: "green"
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 500px auto;
+}
