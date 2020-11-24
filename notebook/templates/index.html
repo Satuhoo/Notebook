@@ -1,35 +1,38 @@
-<!DOCTYPE html>
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-<html>
-    <head>
-        <h1 id="h1">Your notes</h1>
-    </head>
-    <body>
-        <div class="grid-container">
-            <div class="grid-item">
-                {% if latest_notes %}
-                <ul>
-                    {% for note in latest_notes %}
-                    <li><a href="/notebook/{{ note.id }}/">{{ note.note_label }}</a></li>
-                    <p>{{ note.note_text }}</p>
+{% extends 'base.html' %}
+{% block title %}Notes{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {% if latest_notes %}
+            <div class="row row-cols-1 row-cols-md-2">
+                {% for note in latest_notes %}
+                <div class="col-mb-4">
+                    <div class="card text-white bg-info mb-3" style="max-width: 18rem; height: 250px;">
+                        <div class="card-header">{{ note.note_label }}</div>
+                        <div class="card-body">
+                            <p class="card-text">{{ note.note_text }}</p>
+                        </div>
+                    </div>
+                </div>
                     {% endfor %}
-                </ul>
-                {% else %}
-                <p>No saved notes.</p>
-                {% endif %}
             </div>
-            <div class="grid-item">
-                <h2>Add new note</h2>
+            {% else %}
+            <p>No saved notes.</p>
+            {% endif %}
+        </div>
+        <div class="col-6 col-md-4">
+            <h2>Add new note</h2><br>
                 <form method="POST" action="{% url 'create_note' %}">
                     {% csrf_token %}
-                    <label for="label">Label:</label><br><br>
+                    <label for="label">Label:</label><br>
                     <input type="text" id="note_label" name="label"><br><br>
-                    <label for="text">Text:</label><br><br>
+                    <label for="text">Text:</label><br>
                     <input type="text" id="note_text" name="text"><br><br>
-                    <input type="submit" value="Add">
+                    <input type="submit" value="Add" class="btn btn-info">
                 </form>
-            </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+{% endblock %}

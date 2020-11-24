@@ -1,17 +1,15 @@
 from django.http import HttpResponse
-from django.template import loader
 from django.shortcuts import render
 from django.http import Http404
 from .models import Note
 from django.utils import timezone
 
 def index(request):
-    latest_notes = Note.objects.order_by('-pub_date')[:5]
-    template = loader.get_template('index.html')
+    latest_notes = Note.objects.order_by('-pub_date')
     context = {
         'latest_notes': latest_notes,
     }
-    return HttpResponse(template.render(context, request))
+    return render(request, 'index.html', context)
 
 def open_note(request, note_id):
     try:
@@ -28,7 +26,5 @@ def create_note(request):
         note.save()
         
         return HttpResponse("Saved succesfully!")
-
-
 
     
