@@ -9,10 +9,22 @@
             <div class="row row-cols-1 row-cols-md-2">
                 {% for note in latest_notes %}
                 <div class="col-mb-4">
-                    <div class="card text-white bg-info mb-3" style="max-width: 18rem; height: 250px;">
-                        <div class="card-header">{{ note.note_label }}</div>
+                    <div class="card text-white bg-info mb-3" style="max-width: 18rem; height: 300px;">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-9">
+                                {{ note.note_label }}
+                                </div>
+                                <div class="col-3">
+                                    <a class="btn btn-info btn-sm" href="{%url 'delete' note.id %}">
+                                        <i class="material-icons prefix">delete</i>
+                                    </a>
+                                </div>
+                        </div>
+                        </div>
                         <div class="card-body">
                             <p class="card-text">{{ note.note_text }}</p>
+                            
                         </div>
                     </div>
                 </div>
