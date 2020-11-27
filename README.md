@@ -1,6 +1,3 @@
 Created with Python and Django
 
-
-
-Screenshot
-
+![Image](notebook/static/screenshots/notebook.png)
