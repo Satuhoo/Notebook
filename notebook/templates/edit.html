@@ -6,9 +6,9 @@
         <form method="POST" action="{% url 'edit' note.id %}">
             {% csrf_token %}
             <label for="label">Label:</label><br>
-            <input type="text" name="note_label" placeholder="{{ note.note_label }}" value="{{ note.note_label }}"><br><br>
+            <input type="text" name="note_label" placeholder="{{ note.note_label }}" value="{{ note.note_label }}" maxlength="50"><br><br>
             <label for="text">Text:</label><br>
-            <input type="text" name="note_text" placeholder="{{ note.note_text }}" value="{{ note.note_text }}"><br><br>
+            <input type="text" name="note_text" placeholder="{{ note.note_text }}" value="{{ note.note_text }}" maxlength="200"><br><br>
             <input type="submit" value="Save" class="btn btn-info">
         </form>
     {% endif %}

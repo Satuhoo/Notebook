@@ -12,7 +12,7 @@
                     <div class="card text-white bg-info mb-3" style="max-width: 18rem; height: 300px;">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-7">
+                                <div class="col-7" id="note-header">
                                 {{ note.note_label }}
                                 </div>
                                 <div class="col-2">
@@ -40,13 +40,13 @@
             {% endif %}
         </div>
         <div class="col-6 col-md-4">
-            <h2>Add new note</h2><br>
+            <h2 class="h2">Add new note</h2><br>
                 <form method="POST" action="{% url 'create_note' %}">
                     {% csrf_token %}
                     <label for="label">Label:</label><br>
-                    <input type="text" id="note_label" name="label"><br><br>
+                    <input type="text" id="note_label" name="label" maxlength="50"><br><br>
                     <label for="text">Text:</label><br>
-                    <input type="text" id="note_text" name="text"><br><br>
+                    <input type="text" id="note_text" name="text" maxlength="200"><br><br>
                     <input type="submit" value="Add" class="btn btn-info">
                 </form>
         </div>
