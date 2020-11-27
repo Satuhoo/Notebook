@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.http import Http404
 from .models import Note
 from django.utils import timezone
+from .forms import NoteForm
 
 
 def index(request):
@@ -11,13 +12,6 @@ def index(request):
     
     return render(request, 'index.html', context)
 
-def open_note(request, note_id):
-    try:
-        note = Note.objects.get(pk=note_id)
-    except Note.DoesNotExist:
-        raise Http404("Note does not exist")
-    return render(request, 'open_note.html', {'note': note})
-
 def create_note(request):
     if request.method == 'POST':
         label = request.POST.get('label')
@@ -25,10 +19,19 @@ def create_note(request):
         note = Note(note_label = label, note_text = text, pub_date = timezone.now())
         note.save()
         
-        latest_notes = Note.objects.order_by('pub_date')
-        context = {'latest_notes': latest_notes}
-    
-        return render(request, 'index.html', context)
+        return redirect('index')
+        
+def edit(request, note_id):
+    if request.method == 'POST':
+        note = Note.objects.get(pk=note_id)
+        form = NoteForm(request.POST, instance=note)
+        form.save()
+        
+        return redirect('index')
+
+    else:
+        note = Note.objects.get(pk=note_id)
+        return render(request, 'edit.html', {'note': note})
 
 def delete(request, note_id):
     note = Note.objects.get(pk=note_id)
